@@ -1,0 +1,31 @@
+{
+  "node_modules/jstree/dist/themes/default/32px.png": {
+    "file": "assets/32px-3a5c5ca7.png",
+    "src": "node_modules/jstree/dist/themes/default/32px.png"
+  },
+  "node_modules/jstree/dist/themes/default/40px.png": {
+    "file": "assets/40px-a83492a1.png",
+    "src": "node_modules/jstree/dist/themes/default/40px.png"
+  },
+  "node_modules/jstree/dist/themes/default/throbber.gif": {
+    "file": "assets/throbber-28e3fcaa.gif",
+    "src": "node_modules/jstree/dist/themes/default/throbber.gif"
+  },
+  "resources/js/admin.css": {
+    "file": "assets/admin-bba02789.css",
+    "src": "resources/js/admin.css"
+  },
+  "resources/js/admin.js": {
+    "assets": [
+      "assets/32px-3a5c5ca7.png",
+      "assets/throbber-28e3fcaa.gif",
+      "assets/40px-a83492a1.png"
+    ],
+    "css": [
+      "assets/admin-bba02789.css"
+    ],
+    "file": "assets/admin-969c65a5.js",
+    "isEntry": true,
+    "src": "resources/js/admin.js"
+  }
+}

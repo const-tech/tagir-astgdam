@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Client extends Model
+{
+    use HasFactory;
+    protected $guarded = ['id'];
+    public function program() : BelongsTo
+    {
+        return $this->belongsTo(Program::class, 'program_id')->withDefault();
+    }
+    public function city() : BelongsTo
+    {
+        return $this->belongsTo(City::class, 'city_id')->withDefault();
+    }
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id')->withDefault();
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+}

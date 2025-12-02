@@ -1,0 +1,21 @@
+on: push
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run migrations , clear cache for views, config and routes
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd public_html/e3mar25.const-tech.in
+            git pull https://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@github.com/const-tech/e3mar25.git
+            php artisan migrate
+            php artisan optimize:clear            
+          host: 84.16.241.139
+          user: consttechin
+          port: 2204
+          key: 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
+          pass: "YY.~N_HJbFsN"
+          args: -tt

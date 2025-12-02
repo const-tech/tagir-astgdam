@@ -1,0 +1,223 @@
+body {
+    font-family: "Noto Kufi Arabic", sans-serif;
+    background-color: $section-color;
+    color: black;
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+// All Rest
+* {
+    @include all-reset;
+}
+// a Reset
+a {
+    @include a-reset;
+}
+// reset btn
+button {
+    border: none;
+    outline: none;
+}
+// reset form-control
+.form-control {
+    font-size: 14px !important;
+    border: 1px solid $light-grey-color !important;
+}
+// main-section
+.main-section {
+    padding: 1.5rem 0;
+    min-height: calc(100vh - 41.89px - 54.36px - 52.97px);
+}
+// Modal
+.modal-header {
+    .modal-title {
+        font-size: 15px !important;
+    }
+    .btn-close {
+        margin: unset !important;
+    }
+}
+// print
+@media print {
+    .not-print {
+        display: none !important;
+    }
+    body {
+        direction: rtl !important;
+    }
+
+    .container,
+    .container-fluid {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .table-responsive {
+        width: 100% !important;
+    }
+
+    .ar {
+        font-size: 19px !important;
+    }
+
+    .patientFile {
+        .row > * {
+            width: 20%;
+        }
+
+        .check {
+            width: 50% !important;
+        }
+
+        .data-content {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+
+            div {
+                width: 50%;
+
+                p {
+                    font-size: 10px;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .wrapper {
+            display: flex;
+
+            .parent {
+                display: flex;
+                flex-direction: column;
+
+                .data-content {
+                    div {
+                        width: 100%;
+
+                        textarea {
+                            min-height: 140px !important;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .data-content {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        width: 100% !important;
+
+        div {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100% !important;
+
+            div {
+                width: 50%;
+
+                p {
+                    font-size: 8px !important;
+                    white-space: wrap !important;
+                }
+
+                &.holder {
+                    width: 100% !important;
+
+                    .special {
+                        width: 100% !important;
+
+                        textarea {
+                            width: 100% !important;
+                            min-height: 100px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .casher-invoice {
+        .invoice-content {
+            .logo-holder {
+                .the_image {
+                    width: 10px !important;
+                }
+            }
+
+            .invoice-name {
+                font-size: 10px !important;
+            }
+        }
+
+        .the_address {
+            p {
+                font-size: 11px !important;
+            }
+        }
+
+        .tax {
+            font-size: 11px;
+        }
+
+        .the_date {
+            font-size: 11px;
+        }
+
+        div {
+            b {
+                font-size: 11px !important;
+            }
+        }
+
+        .main-table {
+            tr {
+                th {
+                    font-size: 7px;
+                    padding: 4px;
+                }
+
+                td {
+                    font-size: 7px;
+                    padding: 4px;
+                }
+            }
+        }
+
+        .bototm-table {
+            .dd {
+                font-size: 11px !important;
+
+                .nn {
+                    font-size: 11px !important;
+                }
+            }
+        }
+
+        .wel {
+            margin: auto !important;
+            padding: 0 !important;
+            font-size: 12px !important;
+            text-align: center !important;
+        }
+
+        .bar_code_holder {
+            width: 40% !important;
+
+            svg {
+                width: 100% !important;
+                height: 100% !important;
+            }
+        }
+
+        .parent-boxes-info {
+            margin-top: 10px !important;
+            width: 60% !important;
+        }
+    }
+}
