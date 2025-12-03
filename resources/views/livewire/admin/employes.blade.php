@@ -51,6 +51,13 @@
                                         <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+                                    <div class="mt-2">
+                                        <button type="button"
+                                                class="btn btn-outline-primary btn-sm"
+                                                wire:click="downloadImportExample">
+                                            تحميل ملف مثال للاستيراد
+                                        </button>
+                                    </div>
                                     {{-- <div class="inp-holder">
                                     <label for="" class="small-label">المشروع</label>
                                     <select wire:model.defer="excel_company_id" class="form-control"
