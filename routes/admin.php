@@ -76,6 +76,7 @@ Route::group([
         // Authentication Routes
         Route::view('login', 'admin.login')->middleware('admin_guest')->name('login');
         Route::post('login', [AuthController::class, 'login'])->middleware('admin_guest')->name('login.post');
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
         // Protected Admin Routes
         Route::group(['middleware' => ['admin']], function () {
