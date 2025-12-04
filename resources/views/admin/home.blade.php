@@ -194,7 +194,7 @@
                 </a>
             </div>
         </div>
-<!--
+        <!--
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="status_box warning-box">
                 <div class="data">
@@ -244,7 +244,21 @@
                 </a>
             </div>
         </div>
-
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="status_box main-box">
+                <div class="data">
+                    <h3 class="num-stat" data-goal="{{ App\Models\User::clients()->count() }}">0</h3>
+                    <p class="mb-3">@lang('Companies')</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users main-icon"></i>
+                </div>
+                <a href="{{ route('admin.clients') }}" class="more">
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                    @lang('more_info')
+                </a>
+            </div>
+        </div>
         <div class="col-12 col-md-12">
             <div class="row g-3">
                 <!-- <div class="col-12 col-md-6">
@@ -257,24 +271,10 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="col-12 col-md-6">
+                <div class="col-12 ">
                     <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="status_box main-box">
-                                <div class="data">
-                                    <h3 class="num-stat" data-goal="{{ App\Models\User::clients()->count() }}">0</h3>
-                                    <p class="mb-3">@lang('Companies')</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-users main-icon"></i>
-                                </div>
-                                <a href="{{ route('admin.clients') }}" class="more">
-                                    <i class="fa-solid fa-circle-arrow-right"></i>
-                                    @lang('more_info')
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
+
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box purple-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Project::count() }}">0</h3>
@@ -289,7 +289,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box sky-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Goal::count() }}">0</h3>
@@ -304,7 +304,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box orange-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Contract::count() }}">0</h3>
@@ -319,7 +319,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box danger-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Contract::count() }}">0</h3>
