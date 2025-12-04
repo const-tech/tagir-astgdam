@@ -174,7 +174,7 @@
             <table class="main-table" id="prt-content">
                 <thead>
                 <tr>
-                    <th>الرقم الوظيفي</th>
+                    <th>ID</th>
                     <th>الموظف</th>
                     <th>البريد</th>
                     <th>الجوال</th>
