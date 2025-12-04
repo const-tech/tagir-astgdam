@@ -1,8 +1,8 @@
 <div class="{{ request()->is('*/admin/*') ? 'main-side' : ' users ' }}">
     @if ($screen == 'index')
         <x-admin-alert></x-admin-alert>
-        <div class="main-section">
-            <div class="container">
+        <div class="">
+            <div class="">
                 <div class="d-flex align-items-center flex-column flex-xl-row justify-content-between gap-3 mb-3">
                     <div class="main-heading mb-0 me-auto me-xl-0">
                         <div class="large">العملاء</div>

@@ -36,7 +36,7 @@
             <div class="d-flex gap-3 flex-wrap">
                 <a href="{{ route('admin.contracts') }}" class="box-icon">
                     <i class="fas fa-file-signature"></i>
-                    <div class="text">@lang('contracts')</div>
+                    <div class="text">العقود العامة</div>
                 </a>
                 <a href="{{ route('admin.invoices') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/invoice.svg') }}" alt="">
@@ -183,7 +183,7 @@
             <div class="status_box blue-box">
                 <div class="data">
                     <h3 class="num-stat" data-goal="{{ App\Models\User::employes()->count() }}">0</h3>
-                    <p class="mb-3">@lang('all_employees')</p>
+                    <p class="mb-3">موظف الادارة</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-user-tie blue-icon"></i>
@@ -194,7 +194,7 @@
                 </a>
             </div>
         </div>
-
+<!--
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="status_box warning-box">
                 <div class="data">
@@ -209,7 +209,7 @@
                     @lang('more_info')
                 </a>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="status_box danger-box">
@@ -308,10 +308,25 @@
                             <div class="status_box orange-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Contract::count() }}">0</h3>
-                                    <p class="mb-3">@lang('contracts')</p>
+                                    <p class="mb-3">عقود تأجير سارية</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-file-signature orange-icon"></i>
+                                </div>
+                                <a href="{{ route('admin.contracts') }}" class="more">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                    @lang('more_info')
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="status_box danger-box">
+                                <div class="data">
+                                    <h3 class="num-stat" data-goal="{{ App\Models\Contract::count() }}">0</h3>
+                                    <p class="mb-3">عقود تأجير منتهية</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-signature danger-icon"></i>
                                 </div>
                                 <a href="{{ route('admin.contracts') }}" class="more">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
