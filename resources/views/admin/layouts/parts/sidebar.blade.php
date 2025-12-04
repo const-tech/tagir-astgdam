@@ -88,7 +88,7 @@
                 <a href="{{ route('admin.jobs') }}" class="">
                     <div>
                         <i class="fas fa-users"></i>
-                        الوظائف
+                        التحكم المهن
                     </div>
                 </a>
             </li>
@@ -97,7 +97,7 @@
                 <a href="{{ route('admin.employees.statuses') }}" class="">
                     <div>
                         <i class="fas fa-chart-pie"></i>
-                        حالات الموظفين (احصائية)
+                        احصائيات الموظفين
                     </div>
                 </a>
             </li>

@@ -46,18 +46,18 @@
                     <img src="{{ asset('admin-asset/img/employees.svg') }}" alt="">
                     <div class="text">العمالة</div>
                 </a>
-                <a href="{{ route('admin.goals') }}" class="box-icon">
+                <!-- <a href="{{ route('admin.goals') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/documents.svg') }}" alt="">
                     <div class="text">@lang('goals')</div>
-                </a>
+                </a> -->
                 <a href="{{ route('admin.projects') }}" class="box-icon">
                     <i class="fab fa-buffer"></i>
                     <div class="text"> مشاريع التاجير</div>
                 </a>
-                <a href="{{ route('admin.notifications.index') }}" class="box-icon">
+                <!-- <a href="{{ route('admin.notifications.index') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/bell.svg') }}" alt="">
                     <div class="text">@lang('notifications')</div>
-                </a>
+                </a> -->
             </div>
         </div>
         <style>
@@ -247,7 +247,7 @@
 
         <div class="col-12 col-md-12">
             <div class="row g-3">
-                <div class="col-12 col-md-6">
+                <!-- <div class="col-12 col-md-6">
                     <div class="card">
                         <div class="card-header bg-white">
                             @lang('profit')
@@ -256,7 +256,7 @@
                             <canvas class="w-100" id="myChartDate" height="250"></canvas>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12 col-md-6">
                     <div class="row g-3">
                         <div class="col-12 col-md-6">

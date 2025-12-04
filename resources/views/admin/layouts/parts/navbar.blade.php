@@ -32,7 +32,7 @@
                     App\Models\User::whereDate('end_resident', '<', now())->count();
             @endphp
             <div class="list-item d-none d-md-flex">
-                <a href="{{ route('admin.expired') }}" class="main-btn btn-main-color">
+                <a href="{{ route('admin.expired') }}" class="main-btn bg-danger">
                     @lang('expired_documents') :
                     {{ $count }}
                     <i class="fas fa-bell"></i>
