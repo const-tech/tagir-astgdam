@@ -24,6 +24,7 @@ use App\Livewire\Admin\Categories;
 use App\Livewire\Admin\Cities;
 use App\Livewire\Admin\ComponentJobs;
 use App\Livewire\Admin\EmailMenu;
+use App\Livewire\Admin\EmployeesStatus;
 use App\Livewire\Admin\Employes;
 use App\Livewire\Admin\Expired;
 use App\Livewire\Admin\Goals;
@@ -116,6 +117,7 @@ Route::group([
                     ->middleware('can:read_employees')
                     ->name('vacations');
             });
+            Route::get('/employees/statuses', EmployeesStatus::class)->name('employees.statuses');
 
             // Administration Employees
             Route::prefix('administration-employees')->group(function () {

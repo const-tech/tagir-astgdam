@@ -93,6 +93,14 @@
                 </a>
             </li>
             @endcan
+            <li class="list-item">
+                <a href="{{ route('admin.employees.statuses') }}" class="">
+                    <div>
+                        <i class="fas fa-chart-pie"></i>
+                        حالات الموظفين (احصائية)
+                    </div>
+                </a>
+            </li>
             @can('read_work_types')
             <li class="list-item">
                 <a href="{{ route('admin.work_types') }}" class="">
@@ -145,8 +153,10 @@
             </div>
         </a>
     </li>
+
 </div>
 @endcanany
+
 @canany(['read_users', 'read_administrative_structure', 'read_contracts', 'read_projects', 'read_goals'])
 
 <li class="list-item">
