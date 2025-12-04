@@ -10,7 +10,7 @@ class Settings extends Component
     use WithFileUploads;
     public $website_name, $website_url, $tax_number, $address, $building_number, $street_number, $phone,
     $iban, $is_tax, $is_can_send_email, $website_status, $logo, $fav, $maintainance_message,
-    $show_logo, $show_fav, $price_quotation_message;
+    $show_logo, $show_fav, $price_quotation_message,$min_duration;
     public $whatsapp, $snapchat, $twitter, $facebook, $instagram;
     public $rules = [
         'website_name' => 'required',
@@ -32,7 +32,8 @@ class Settings extends Component
         'twitter' => 'nullable',
         'facebook' => 'nullable',
         'instagram' => 'nullable',
-        'price_quotation_message' => 'nullable'
+        'price_quotation_message' => 'nullable',
+        'min_duration' => 'nullable|integer|min:0',
     ];
     public $files = [
         'logo',
