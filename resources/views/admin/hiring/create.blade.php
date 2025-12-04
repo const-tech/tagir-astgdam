@@ -6,7 +6,7 @@
         <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
             <div class="main-title mb-0">
                 <div class="small">الرئيسية</div>
-                <div class="large">اضافة مشروع</div>
+                <div class="large">اضافة مشروع تأجير</div>
             </div>
 
             <a href="{{ route('admin.hiring') }}" class="main-btn bg-secondary">رجوع <i class="fas fa-arrow-left-long"></i></a>
@@ -57,15 +57,14 @@
 
             <!-- العقد -->
             <div class="col">
-                <label>العقد</label>
+                <label>العقد *</label>
+                <input type="file" class="form-control">
+            </div>
+            <div class="col">
+                <label>ملف اكسيل للعامل *</label>
                 <input type="file" class="form-control">
             </div>
 
-            <!-- عدد العمال -->
-            <div class="col">
-                <label>عدد العمال</label>
-                <input type="number" class="form-control" placeholder="مثال: 5">
-            </div>
 
             <!-- زر الحفظ -->
 
