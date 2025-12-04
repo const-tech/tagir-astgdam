@@ -90,7 +90,7 @@ class HiringProjects extends Component
         $this->project_id   = $project->id;
         $this->title        = $project->title;
         $this->client_id    = $project->client_id;
-        $this->client_phone = $project->client_phone;
+        $this->client_phone = $project->client?->phone;
         $this->client_city  = $project->client_city;
         $this->start_date   = $project->start_date;
         $this->end_date     = $project->end_date;
