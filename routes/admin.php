@@ -24,10 +24,12 @@ use App\Livewire\Admin\Categories;
 use App\Livewire\Admin\Cities;
 use App\Livewire\Admin\ComponentJobs;
 use App\Livewire\Admin\EmailMenu;
+use App\Livewire\Admin\EmployeesStatus;
 use App\Livewire\Admin\Employes;
 use App\Livewire\Admin\Expired;
 use App\Livewire\Admin\Goals;
 use App\Livewire\Admin\Governmentals;
+use App\Livewire\Admin\HiringProjects;
 use App\Livewire\Admin\InsuranceCompanies;
 use App\Livewire\Admin\Jobs;
 use App\Livewire\Admin\Menus;
@@ -116,6 +118,7 @@ Route::group([
                     ->middleware('can:read_employees')
                     ->name('vacations');
             });
+            Route::get('/employees/statuses', EmployeesStatus::class)->name('employees.statuses');
 
             // Administration Employees
             Route::prefix('administration-employees')->group(function () {
@@ -285,6 +288,13 @@ Route::group([
             // Vendors
             Route::get('vendors', \App\Livewire\Admin\Vendors::class)->name('vendors.index');
 
+            Route::view('/management', 'admin.management.index')->name('management');
+            Route::view('/management/create', 'admin.management.create')->name('management.create');
+            Route::view('/workers', 'admin.workers.index')->name('workers');
+            Route::view('/workers/create', 'admin.workers.create')->name('workers.create');
+            // Route::view('/hiring', 'admin.hiring.index')->name('hiring');
+            // Route::view('/hiring/create', 'admin.hiring.create')->name('hiring.create');
+            Route::get('/hiring', HiringProjects::class)->name('hiring');
             // Articles Categories
             Route::prefix('articles-categories')->group(function () {
                 Route::view('/', 'admin.articles-categories.index')->name('articles-categories.index');

@@ -20,7 +20,7 @@
                 </a>
             </div>
 
-            @php
+            {{-- @php
                 $count =
                     App\Models\Governmental::whereDate('expire_date', '<', now())->count() +
                     App\Models\User::whereDate('end_id_number', '<', now())->count() +
@@ -32,11 +32,27 @@
                     App\Models\User::whereDate('end_resident', '<', now())->count();
             @endphp
             <div class="list-item d-none d-md-flex">
-                <a href="{{ route('admin.expired') }}" class="main-btn btn-main-color">
+                <a href="{{ route('admin.expired') }}" class="main-btn bg-danger">
                     @lang('expired_documents') :
                     {{ $count }}
                     <i class="fas fa-bell"></i>
                 </a>
+            </div> --}}
+
+            {{--  --}}
+            <div class="list-item d-none d-md-flex">
+                @php $expiredCount = $expired_counts['total'] ?? 0; @endphp
+                @if($expiredCount > 0)
+                    <a href="{{ route('admin.expired') }}" class="main-btn bg-danger">
+                        @lang('expired_documents') : {{ $expiredCount }}
+                        <i class="fas fa-bell"></i>
+                    </a>
+                @else
+                    <span class="main-btn btn-secondary">
+                        @lang('expired_documents') : 0
+                        <i class="fas fa-bell"></i>
+                    </span>
+                @endif
             </div>
 
 

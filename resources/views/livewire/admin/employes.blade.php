@@ -51,6 +51,13 @@
                                         <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+                                    <div class="mt-2">
+                                        <button type="button"
+                                                class="btn btn-outline-primary btn-sm"
+                                                wire:click="downloadImportExample">
+                                            تحميل ملف مثال للاستيراد
+                                        </button>
+                                    </div>
                                     {{-- <div class="inp-holder">
                                     <label for="" class="small-label">المشروع</label>
                                     <select wire:model.defer="excel_company_id" class="form-control"
@@ -74,7 +81,7 @@
                                     data-bs-dismiss="modal">رجوع
                             </button>
                             <button type="button" wire:click="uploadExcelFile" class="btn btn-primary btn-sm px-3">
-                                {{ __('save') }}
+                                حفظ
                             </button>
                         </div>
                     </div>
@@ -167,15 +174,15 @@
             <table class="main-table" id="prt-content">
                 <thead>
                 <tr>
-                    <th>الرقم الوظيفي</th>
+                    <th>ID</th>
                     <th>الموظف</th>
                     <th>البريد</th>
                     <th>الجوال</th>
                     <th>رقم الاقامة</th>
                     <th>انتهاء الاقامة</th>
                     <th>حالة الموظف</th>
-                    <th>جهة العمل</th>
-                    <th>تاريخ مباشرة العمل</th>
+                    {{-- <th>جهة العمل</th> --}}
+                    {{-- <th>تاريخ مباشرة العمل</th> --}}
                     <th>تاريخ انتهاء التأمين</th>
                     <th>التأمين</th>
                     <th>المهنة</th>
@@ -200,10 +207,10 @@
                         <td>{{ $user->id_number }}</td>
                         <td>{{ $user->end_id_number }}</td>
                         <td>{{ __($user->status) }}</td>
-                        <td class="{{ !$user->side_job ? 'text-danger' : '' }}">
+                        {{-- <td class="{{ !$user->side_job ? 'text-danger' : '' }}">
                             {{ $user->side_job ?? 'غير محدد' }}</td>
                         <td class="{{ !$user->start_work ? 'text-danger' : '' }}">
-                            {{ $user->start_work ?? 'غير محدد' }}</td>
+                            {{ $user->start_work ?? 'غير محدد' }}</td> --}}
                         <td>{{ $user->end_insurance }}</td>
                         <td class="{{ !$user->insuranceCompany ? 'text-danger' : '' }}">
                             {{ $user->insuranceCompany?->name ?? 'غير محدد' }}</td>

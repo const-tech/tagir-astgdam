@@ -125,6 +125,12 @@
                         </div>
                         <div class="col">
                             <div class="inp-holder">
+                                <label class="special-label" for="minDuration">اقل مده</label>
+                                <input type="number" class="form-control" wire:model="min_duration" id="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="inp-holder">
                                 <label class="special-input mb-1">
                                     <span>@lang('admin.Logo image')</span>
                                     <input type="file" wire:model="logo" id="siteLogo" class="form-control">

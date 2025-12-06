@@ -10,12 +10,33 @@
             @lang('admin.Dashboard')
         </div>
     </div>
+    <div class="labor-dashboard-wrapper mb-4">
+        <div class="labor-cards-container">
+            <div class="labor-info-card total-workers">
+                <span class="labor-card-icon">👥</span>
+                <div class="labor-card-title">عدد العمالة الإجمالي</div>
+                <div class="labor-count-number" id="totalWorkers">{{ \App\Models\User::employes()->count()}}</div>
+            </div>
+
+            <div class="labor-info-card rented-workers">
+                <span class="labor-card-icon">📋</span>
+                <div class="labor-card-title">عمالة مؤجرة</div>
+                <div class="labor-count-number" id="rentedWorkers">{{ \App\Models\User::employes()->whereNotNull('side_job_id')->count() }}</div>
+            </div>
+
+            <div class="labor-info-card non-rented-workers">
+                <span class="labor-card-icon">✓</span>
+                <div class="labor-card-title">عمالة بدون تأجير</div>
+                <div class="labor-count-number" id="nonRentedWorkers">{{ \App\Models\User::employes()->whereNull('side_job_id')->count() }}</div>
+            </div>
+        </div>
+    </div>
     <div class="row g-3 mb-2">
         <div class="col-12 ">
             <div class="d-flex gap-3 flex-wrap">
                 <a href="{{ route('admin.contracts') }}" class="box-icon">
                     <i class="fas fa-file-signature"></i>
-                    <div class="text">@lang('contracts')</div>
+                    <div class="text">العقود العامة</div>
                 </a>
                 <a href="{{ route('admin.invoices') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/invoice.svg') }}" alt="">
@@ -23,20 +44,29 @@
                 </a>
                 <a href="{{ route('admin.employes') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/employees.svg') }}" alt="">
-                    <div class="text">@lang('employees')</div>
+                    <div class="text">العمالة</div>
                 </a>
-                <a href="{{ route('admin.goals') }}" class="box-icon">
+                <!-- <a href="{{ route('admin.goals') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/documents.svg') }}" alt="">
                     <div class="text">@lang('goals')</div>
-                </a>
+                </a> -->
                 <a href="{{ route('admin.projects') }}" class="box-icon">
                     <i class="fab fa-buffer"></i>
-                    <div class="text"> المشاريع</div>
+                    <div class="text"> مشاريع التاجير</div>
                 </a>
-                <a href="{{ route('admin.notifications.index') }}" class="box-icon">
+                <a href="{{ route('admin.invoices.create') }}" class="box-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <div class="text">اضافة فاتورة</div>
+                </a>
+
+                <a href="{{ route('admin.prices') }}" class="box-icon">
+                    <i class="fas fa-file-signature"></i>
+                    <div class="text">اضافة عرض السعر</div>
+                </a>
+                <!-- <a href="{{ route('admin.notifications.index') }}" class="box-icon">
                     <img src="{{ asset('admin-asset/img/bell.svg') }}" alt="">
                     <div class="text">@lang('notifications')</div>
-                </a>
+                </a> -->
             </div>
         </div>
         <style>
@@ -156,33 +186,13 @@
         </style>
 
 
-        <div class="labor-dashboard-wrapper mb-4">
-            <div class="labor-cards-container">
-                <div class="labor-info-card total-workers">
-                    <span class="labor-card-icon">👥</span>
-                    <div class="labor-card-title">عدد العمالة الإجمالي</div>
-                    <div class="labor-count-number" id="totalWorkers">150</div>
-                </div>
 
-                <div class="labor-info-card rented-workers">
-                    <span class="labor-card-icon">📋</span>
-                    <div class="labor-card-title">عمالة مؤجرة</div>
-                    <div class="labor-count-number" id="rentedWorkers">95</div>
-                </div>
-
-                <div class="labor-info-card non-rented-workers">
-                    <span class="labor-card-icon">✓</span>
-                    <div class="labor-card-title">عمالة بدون تأجير</div>
-                    <div class="labor-count-number" id="nonRentedWorkers">55</div>
-                </div>
-            </div>
-        </div>
 
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="status_box blue-box">
                 <div class="data">
                     <h3 class="num-stat" data-goal="{{ App\Models\User::employes()->count() }}">0</h3>
-                    <p class="mb-3">@lang('all_employees')</p>
+                    <p class="mb-3">موظف الادارة</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-user-tie blue-icon"></i>
@@ -193,7 +203,7 @@
                 </a>
             </div>
         </div>
-
+        <!--
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="status_box warning-box">
                 <div class="data">
@@ -208,7 +218,7 @@
                     @lang('more_info')
                 </a>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="status_box danger-box">
@@ -243,10 +253,24 @@
                 </a>
             </div>
         </div>
-
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="status_box main-box">
+                <div class="data">
+                    <h3 class="num-stat" data-goal="{{ App\Models\User::clients()->count() }}">0</h3>
+                    <p class="mb-3">@lang('Companies')</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users main-icon"></i>
+                </div>
+                <a href="{{ route('admin.clients') }}" class="more">
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                    @lang('more_info')
+                </a>
+            </div>
+        </div>
         <div class="col-12 col-md-12">
             <div class="row g-3">
-                <div class="col-12 col-md-6">
+                <!-- <div class="col-12 col-md-6">
                     <div class="card">
                         <div class="card-header bg-white">
                             @lang('profit')
@@ -255,25 +279,11 @@
                             <canvas class="w-100" id="myChartDate" height="250"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6">
+                </div> -->
+                <div class="col-12 ">
                     <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="status_box main-box">
-                                <div class="data">
-                                    <h3 class="num-stat" data-goal="{{ App\Models\User::clients()->count() }}">0</h3>
-                                    <p class="mb-3">@lang('Companies')</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-users main-icon"></i>
-                                </div>
-                                <a href="{{ route('admin.clients') }}" class="more">
-                                    <i class="fa-solid fa-circle-arrow-right"></i>
-                                    @lang('more_info')
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
+
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box purple-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Project::count() }}">0</h3>
@@ -288,7 +298,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box sky-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Goal::count() }}">0</h3>
@@ -303,14 +313,29 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="status_box orange-box">
                                 <div class="data">
                                     <h3 class="num-stat" data-goal="{{ App\Models\Contract::count() }}">0</h3>
-                                    <p class="mb-3">@lang('contracts')</p>
+                                    <p class="mb-3">عقود تأجير سارية</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-file-signature orange-icon"></i>
+                                </div>
+                                <a href="{{ route('admin.contracts') }}" class="more">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                    @lang('more_info')
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                            <div class="status_box danger-box">
+                                <div class="data">
+                                    <h3 class="num-stat" data-goal="{{ App\Models\Contract::count() }}">0</h3>
+                                    <p class="mb-3">عقود تأجير منتهية</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-signature danger-icon"></i>
                                 </div>
                                 <a href="{{ route('admin.contracts') }}" class="more">
                                     <i class="fa-solid fa-circle-arrow-right"></i>

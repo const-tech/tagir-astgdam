@@ -160,7 +160,7 @@
     </div>
 </div>
 @push('js')
-<script src="https://cdn.tiny.cloud/1/mt1iah20fgcfgolvmikfl2j9qka5yqiz51ln34mx637d1033/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/tapu6ryxz7pxmzviysxj5e4qahc0in0p3a2nn3cg1mci5k3x/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
         tinymce.init({

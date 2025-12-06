@@ -10,7 +10,7 @@
         @include('admin.layouts.parts.sidebar')
         @yield('content')
         <footer class="main-footer not-print">
-            جميع الحقوق محفوظة لـ <a href="https://www.const-tech.org/">كوكبة التقنية</a> . © 2024
+            جميع الحقوق محفوظة لـ <a href="">تأجير</a> . © 2024
         </footer>
     </div>
     <!-- End layout -->

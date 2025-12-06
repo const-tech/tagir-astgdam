@@ -88,11 +88,19 @@
                         <a href="{{ route('admin.jobs') }}" class="">
                             <div>
                                 <i class="fas fa-users"></i>
-                                الوظائف
+                                التحكم المهن
                             </div>
                         </a>
                     </li>
                 @endcan
+                <li class="list-item">
+                    <a href="{{ route('admin.employees.statuses') }}" class="">
+                        <div>
+                            <i class="fas fa-chart-pie"></i>
+                            احصائيات الموظفين
+                        </div>
+                    </a>
+                </li>
                 @can('read_work_types')
                     <li class="list-item">
                         <a href="{{ route('admin.work_types') }}" class="">
@@ -145,8 +153,10 @@
                         </div>
                     </a>
                 </li>
+
             </div>
         @endcanany
+
         @canany(['read_users', 'read_administrative_structure', 'read_contracts', 'read_projects', 'read_goals'])
 
             <li class="list-item">
@@ -213,6 +223,42 @@
                 @endcan
             </div>
         @endcanany
+        <li class="list-item">
+            <a data-bs-toggle="collapse" href="#hiring" aria-expanded=""">
+                <div>
+                    <i class=" fas fa-gear"></i>
+                    ادارة المشاريع
+                </div>
+                <i class="fas fa-angle-left "></i>
+            </a>
+        </li>
+        <div id="hiring" class="collapse item-collapse">
+
+            <li class="list-item">
+                <a href="{{ route('admin.management') }}" class="">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        المشاريع
+                    </div>
+                </a>
+            </li>
+            <li class="list-item">
+                <a href="{{ route('admin.workers') }}" class="">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        العمالة
+                    </div>
+                </a>
+            </li>
+            <li class="list-item">
+                <a href="{{ route('admin.hiring') }}" class="">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        تأجير العمالة
+                    </div>
+                </a>
+            </li>
+        </div>
         @can('read_clients')
             <li class="list-item">
                 <a href="{{ route('admin.clients') }}" class="">

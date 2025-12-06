@@ -8,7 +8,9 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Exports\EmployesExport;
+use App\Exports\EmployesImportExampleExport;
 use App\Models\InsuranceCompany;
+use App\Models\Job;
 use App\Models\Nationality;
 use App\Traits\livewireResource;
 use Illuminate\Support\Facades\Hash;
@@ -123,7 +125,7 @@ class Employes extends Component
             'image' => ['nullable'],
             'gender' => ['nullable'],
             'work_type_id' => ['nullable'],
-            'side_job_id' => ['required'],
+            'side_job_id' => ['nullable'],
             // 'price_quotation_job_id' => 'required',
             'job_id' => 'required|exists:jobs,id',
 
@@ -349,110 +351,198 @@ class Employes extends Component
         session()->flash('success', 'تم حذف الارشفه بنجاح');
     }
 
-    public function uploadExcelFile()
-    {
-        $this->validate(
-            [
-                'import_file' => 'required|file',
-                // 'excel_company_id' => 'required',
-            ],
-            [
-                'import_file.required' => __('Excel Input required'),
-                'import_file.file' => __('Excel Input must be a file')
-            ]
-        );
-        try {
-            $file = $this->import_file;
-            $spreadsheet = IOFactory::load($file->getRealPath());
-            $sheet = $spreadsheet->getSheet(0);
-            $maxcols = $sheet->getHighestRow();
-            // dd($maxcols);
-            for ($i = 7; $i <= $maxcols; $i++) {
-                // start data to save
-                $idNumber = $sheet->getCell("B$i")->getValue(); // Id Number
-                $userFullName = $sheet->getCell("C$i")->getValue(); // Name
-                $contractStartAt = $sheet->getCell("D$i")->getValue();
-                $mobile = $sheet->getCell("E$i")->getValue();
-                $email = $sheet->getCell("F$i")->getValue();
-                $passportNumber = $sheet->getCell("G$i")->getValue();
-                $passportExpiredDate = $sheet->getCell("H$i")->getValue();
-                $idNumberStartAt = $sheet->getCell("I$i")->getValue();
-                $idNumberExpiredDate = $sheet->getCell("J$i")->getValue();
-                $birthDay = $sheet->getCell("K$i")->getValue();
-                $insuranceExpiredAt = $sheet->getCell("L$i")->getValue();
-                $insuranceName = $sheet->getCell("M$i")->getValue();
-                $job = $sheet->getCell("P$i")->getValue();
+    // public function uploadExcelFile()
+    // {
+    //     $this->validate(
+    //         [
+    //             'import_file' => 'required|file',
+    //             // 'excel_company_id' => 'required',
+    //         ],
+    //         [
+    //             'import_file.required' => __('Excel Input required'),
+    //             'import_file.file' => __('Excel Input must be a file')
+    //         ]
+    //     );
+    //     try {
+    //         $file = $this->import_file;
+    //         $spreadsheet = IOFactory::load($file->getRealPath());
+    //         $sheet = $spreadsheet->getSheet(0);
+    //         $maxcols = $sheet->getHighestRow();
+    //         // dd($maxcols);
+    //         for ($i = 7; $i <= $maxcols; $i++) {
+    //             // start data to save
+    //             $idNumber = $sheet->getCell("B$i")->getValue(); // Id Number
+    //             $userFullName = $sheet->getCell("C$i")->getValue(); // Name
+    //             $contractStartAt = $sheet->getCell("D$i")->getValue();
+    //             $mobile = $sheet->getCell("E$i")->getValue();
+    //             $email = $sheet->getCell("F$i")->getValue();
+    //             $passportNumber = $sheet->getCell("G$i")->getValue();
+    //             $passportExpiredDate = $sheet->getCell("H$i")->getValue();
+    //             $idNumberStartAt = $sheet->getCell("I$i")->getValue();
+    //             $idNumberExpiredDate = $sheet->getCell("J$i")->getValue();
+    //             $birthDay = $sheet->getCell("K$i")->getValue();
+    //             $insuranceExpiredAt = $sheet->getCell("L$i")->getValue();
+    //             $insuranceName = $sheet->getCell("M$i")->getValue();
+    //             $job = $sheet->getCell("P$i")->getValue();
 
-                // $companyName = $sheet->getCell("D$i")->getValue(); //
-                // $status = $sheet->getCell("K$i")->getValue();
-                // end date to save
-                // dd($contractStartAt);
-                $nameArray = explode(' ', $userFullName);
-                // $company = (!is_null($companyName)) ? Company::firstOrCreate(['name' => $companyName], ['name' => $companyName]) : null;
-                $insuranceCompany = (!is_null($insuranceName)) ? InsuranceCompany::firstOrCreate(['name' => $insuranceName], ['name' => $insuranceName]) : null;
-                if (!is_null($idNumber)) {
-                    $userExists = User::withTrashed()->where('id_number', $idNumber)->first();
-                    if ($userExists?->deleted_at) { // delete user if actually deleted to add user again from file
-                        $userExists->forceDelete();
-                        $userExists = null;
-                    }
-                    if (!$userExists) {
-                        $user = User::create([
-                            'type' => 'employe',
-                            'id_number' => $idNumber,
-                            'name' => $userFullName,
-                            'start_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
-                            'end_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
-                            'password' => bcrypt(Str::random(15)),
-                            'email' => $email,
-                            'phone' => Str::startsWith($mobile, '5') ? '0' . $mobile : null,
-                            'active' => 1,
-                            'status' => 'active',
-                            'end_passport' => $this->excelToObjectDate($passportExpiredDate),
-                            'end_insurance' => $this->excelToObjectDate($insuranceExpiredAt),
-                            'insurance_company_id' => $insuranceCompany?->id,
-                            'start_work' => $this->excelToObjectDate($contractStartAt),
-                            'birthday' => $this->excelToObjectDate($birthDay),
-                            'passport_number' => $passportNumber,
-                            'first_name' => isset($nameArray[0]) ? $nameArray[0] : null,
-                            'second_name' => isset($nameArray[1]) ? $nameArray[1] : null,
-                            'last_name' => (isset($nameArray[2]) ? $nameArray[2] : null) . ' ' . (isset($nameArray[3]) ? $nameArray[3] : null),
-                            'job' => $job
-                        ]);
-                    } else {
-                        $userExists->update([
-                            'id_number' => $idNumber,
-                            'name' => $userFullName,
-                            'start_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
-                            'end_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
-                            'password' => bcrypt(Str::random(15)),
-                            'email' => $email,
-                            'phone' => Str::startsWith($mobile, '5') ? '0' . $mobile : null,
-                            'active' => 1,
-                            'status' => 'active',
-                            'end_passport' => $this->excelToObjectDate($passportExpiredDate),
-                            'end_insurance' => $this->excelToObjectDate($insuranceExpiredAt),
-                            'insurance_company_id' => $insuranceCompany?->id,
-                            'start_work' => $this->excelToObjectDate($contractStartAt),
-                            'birthday' => $this->excelToObjectDate($birthDay),
-                            'passport_number' => $passportNumber,
-                            'first_name' => isset($nameArray[0]) ? $nameArray[0] : null,
-                            'second_name' => isset($nameArray[1]) ? $nameArray[1] : null,
-                            'last_name' => (isset($nameArray[2]) ? $nameArray[2] : null) . ' ' . (isset($nameArray[3]) ? $nameArray[3] : null),
-                            'job' => $job
-                        ]);
-                    }
+    //             // $companyName = $sheet->getCell("D$i")->getValue(); //
+    //             // $status = $sheet->getCell("K$i")->getValue();
+    //             // end date to save
+    //             // dd($contractStartAt);
+    //             $nameArray = explode(' ', $userFullName);
+    //             // $company = (!is_null($companyName)) ? Company::firstOrCreate(['name' => $companyName], ['name' => $companyName]) : null;
+    //             $insuranceCompany = (!is_null($insuranceName)) ? InsuranceCompany::firstOrCreate(['name' => $insuranceName], ['name' => $insuranceName]) : null;
+    //             if (!is_null($idNumber)) {
+    //                 $userExists = User::withTrashed()->where('id_number', $idNumber)->first();
+    //                 if ($userExists?->deleted_at) { // delete user if actually deleted to add user again from file
+    //                     $userExists->forceDelete();
+    //                     $userExists = null;
+    //                 }
+    //                 if (!$userExists) {
+    //                     $user = User::create([
+    //                         'type' => 'employe',
+    //                         'id_number' => $idNumber,
+    //                         'name' => $userFullName,
+    //                         'start_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
+    //                         'end_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
+    //                         'password' => bcrypt(Str::random(15)),
+    //                         'email' => $email,
+    //                         'phone' => Str::startsWith($mobile, '5') ? '0' . $mobile : null,
+    //                         'active' => 1,
+    //                         'status' => 'active',
+    //                         'end_passport' => $this->excelToObjectDate($passportExpiredDate),
+    //                         'end_insurance' => $this->excelToObjectDate($insuranceExpiredAt),
+    //                         'insurance_company_id' => $insuranceCompany?->id,
+    //                         'start_work' => $this->excelToObjectDate($contractStartAt),
+    //                         'birthday' => $this->excelToObjectDate($birthDay),
+    //                         'passport_number' => $passportNumber,
+    //                         'first_name' => isset($nameArray[0]) ? $nameArray[0] : null,
+    //                         'second_name' => isset($nameArray[1]) ? $nameArray[1] : null,
+    //                         'last_name' => (isset($nameArray[2]) ? $nameArray[2] : null) . ' ' . (isset($nameArray[3]) ? $nameArray[3] : null),
+    //                         'job' => $job
+    //                     ]);
+    //                 } else {
+    //                     $userExists->update([
+    //                         'id_number' => $idNumber,
+    //                         'name' => $userFullName,
+    //                         'start_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
+    //                         'end_id_number' => $this->excelToObjectDate($idNumberExpiredDate),
+    //                         'password' => bcrypt(Str::random(15)),
+    //                         'email' => $email,
+    //                         'phone' => Str::startsWith($mobile, '5') ? '0' . $mobile : null,
+    //                         'active' => 1,
+    //                         'status' => 'active',
+    //                         'end_passport' => $this->excelToObjectDate($passportExpiredDate),
+    //                         'end_insurance' => $this->excelToObjectDate($insuranceExpiredAt),
+    //                         'insurance_company_id' => $insuranceCompany?->id,
+    //                         'start_work' => $this->excelToObjectDate($contractStartAt),
+    //                         'birthday' => $this->excelToObjectDate($birthDay),
+    //                         'passport_number' => $passportNumber,
+    //                         'first_name' => isset($nameArray[0]) ? $nameArray[0] : null,
+    //                         'second_name' => isset($nameArray[1]) ? $nameArray[1] : null,
+    //                         'last_name' => (isset($nameArray[2]) ? $nameArray[2] : null) . ' ' . (isset($nameArray[3]) ? $nameArray[3] : null),
+    //                         'job' => $job
+    //                     ]);
+    //                 }
+    //             }
+
+    //             $this->reset([
+    //                 'import_file',
+    //                 // 'excel_company_id'
+    //             ]);
+    //         }
+    //         $this->dispatch('alert', type: 'success', message: 'تم الرفع بنجاح');
+    //     } catch (\Exception $e) {
+    //         $this->dispatch('alert', type: 'error', message: 'حدث خطأ اثناء الرفع برجاء التأكد من ترتيب الملف والبيانات واعد المحاولة' . $e->getMessage());
+    //     }
+    // }
+    public function uploadExcelFile()
+{
+    $this->validate(
+        [
+            'import_file' => 'required|file',
+        ],
+        [
+            'import_file.required' => __('Excel Input required'),
+            'import_file.file' => __('Excel Input must be a file')
+        ]
+    );
+
+    try {
+        $file = $this->import_file;
+        $spreadsheet = IOFactory::load($file->getRealPath());
+        $sheet = $spreadsheet->getSheet(0);
+        $maxRows = $sheet->getHighestRow();
+        for ($i = 2; $i <= $maxRows; $i++) {
+            $idNumber            = $sheet->getCell("A$i")->getValue();
+            $userFullName        = $sheet->getCell("B$i")->getValue();
+            $contractStartAt     = $sheet->getCell("C$i")->getValue();
+            $mobile              = $sheet->getCell("D$i")->getValue();
+            $email               = $sheet->getCell("E$i")->getValue();
+            $passportNumber      = $sheet->getCell("F$i")->getValue();
+            $passportExpiredDate = $sheet->getCell("G$i")->getValue();
+            $idNumberStartAt     = $sheet->getCell("H$i")->getValue();
+            $idNumberExpiredDate = $sheet->getCell("I$i")->getValue();
+            $birthDay            = $sheet->getCell("J$i")->getValue();
+            $insuranceExpiredAt  = $sheet->getCell("K$i")->getValue();
+            $insuranceName       = $sheet->getCell("L$i")->getValue();
+            $jobName             = $sheet->getCell("M$i")->getValue();
+            $nameArray = explode(' ', trim($userFullName));
+            $insuranceCompany = (!is_null($insuranceName) && $insuranceName != '')
+                ? InsuranceCompany::firstOrCreate(['name' => $insuranceName], ['name' => $insuranceName])
+                : null;
+            $jobModel = null;
+            if (!is_null($jobName) && $jobName != '') {
+                $jobModel = Job::firstOrCreate(['name' => $jobName], ['name' => $jobName]);
+            }
+
+            if (!is_null($idNumber) && $idNumber != '') {
+
+                $userExists = User::withTrashed()->where('id_number', $idNumber)->first();
+                if ($userExists?->deleted_at) {
+                    $userExists->forceDelete();
+                    $userExists = null;
                 }
 
-                $this->reset([
-                    'import_file',
-                    // 'excel_company_id'
-                ]);
+                $commonData = [
+                    'type'               => 'employe',
+                    'id_number'          => $idNumber,
+                    'name'               => $userFullName,
+                    'start_id_number'    => $this->excelToObjectDate($idNumberStartAt),
+                    'end_id_number'      => $this->excelToObjectDate($idNumberExpiredDate),
+                    'password'           => bcrypt(Str::random(15)),
+                    'email'              => $email,
+                    'phone'              => Str::startsWith($mobile, '5') ? '0' . $mobile : $mobile,
+                    'active'             => 1,
+                    'status'             => 'active',
+                    'end_passport'       => $this->excelToObjectDate($passportExpiredDate),
+                    'end_insurance'      => $this->excelToObjectDate($insuranceExpiredAt),
+                    'insurance_company_id' => $insuranceCompany?->id,
+                    'start_work'         => $this->excelToObjectDate($contractStartAt),
+                    'birthday'           => $this->excelToObjectDate($birthDay),
+                    'passport_number'    => $passportNumber,
+                    'first_name'         => $nameArray[0] ?? null,
+                    'second_name'        => $nameArray[1] ?? null,
+                    'last_name'          => (isset($nameArray[2]) ? $nameArray[2] : null) . ' ' . (isset($nameArray[3]) ? $nameArray[3] : null),
+                    'job_id'             => $jobModel?->id,
+                ];
+
+                if (!$userExists) {
+                    User::create($commonData);
+                } else {
+                    $userExists->update($commonData);
+                }
             }
-            $this->dispatch('alert', type: 'success', message: 'تم الرفع بنجاح');
-        } catch (\Exception $e) {
-            $this->dispatch('alert', type: 'error', message: 'حدث خطأ اثناء الرفع برجاء التأكد من ترتيب الملف والبيانات واعد المحاولة' . $e->getMessage());
         }
+        $this->reset(['import_file']);
+        $this->dispatch('alert', type: 'success', message: 'تم الرفع بنجاح');
+    } catch (\Exception $e) {
+        $this->dispatch('alert', type: 'error', message: 'حدث خطأ اثناء الرفع برجاء التأكد من ترتيب الملف والبيانات واعد المحاولة: ' . $e->getMessage());
+    }
+}
+    public function downloadImportExample()
+    {
+        return Excel::download(new EmployesImportExampleExport(), 'employees_import_example.xlsx');
     }
 
     private function excelToObjectDate($date)

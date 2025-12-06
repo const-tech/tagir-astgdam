@@ -767,26 +767,30 @@ input[readonly]:focus {
 .main-table {
   width: 100%;
   border-radius: 8px 8px 0px 0px;
-  border: 1px solid #e0e0e0;
+}
+.main-table tr:nth-child(2n):not(.bg-white) {
+  background-color: #ecf2f2 !important;
 }
 .main-table thead {
-  background: #fff;
-  border: 1px solid #e0e0e0;
+  background-color: #10375c;
 }
 .main-table thead tr th {
-  padding: 12px 13px;
+  padding: 10px 13px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
+  vertical-align: middle;
   text-align: center;
-}
-.main-table tbody tr.active {
-  background: rgba(54, 159, 255, 0.19);
+  color: #fff;
 }
 .main-table tbody tr td {
   padding: 10px 13px;
   font-weight: 500;
   font-size: 14px;
+  vertical-align: middle;
   text-align: center;
+  font-weight: bold;
+  color: #555;
+  border: 1px solid #ddd !important;
 }
 .main-table tbody tr td .user {
   display: flex;
@@ -809,28 +813,169 @@ input[readonly]:focus {
   width: 3.2em !important;
   height: 1.5em;
 }
-.main-table tbody tr .drop-table .dropdown-toggle::after {
+.main-table tbody tr td .drop-table .dropdown-toggle::after {
   content: none;
 }
-.main-table tbody tr .drop-table .dropdown-menu {
+.main-table tbody tr td .drop-table .dropdown-menu {
   transition: 300ms;
   opacity: 0;
   visibility: hidden;
 }
-.main-table tbody tr .drop-table .dropdown-menu li .dropdown-item {
+.main-table tbody tr td .drop-table .dropdown-menu li .dropdown-item {
   text-align: start;
   font-size: 13px;
 }
-.main-table tbody tr .drop-table .dropdown-menu li .dropdown-item i,
-.main-table tbody tr .drop-table .dropdown-menu li .dropdown-item svg,
-.main-table tbody tr .drop-table .dropdown-menu li .dropdown-item img {
+.main-table tbody tr td .drop-table .dropdown-menu li .dropdown-item i,
+.main-table tbody tr td .drop-table .dropdown-menu li .dropdown-item svg,
+.main-table tbody tr td .drop-table .dropdown-menu li .dropdown-item img {
   width: 18px;
 }
-.main-table tbody tr .drop-table .dropdown-menu.show {
+.main-table tbody tr td .drop-table .dropdown-menu.show {
   opacity: 1;
   visibility: visible;
 }
 
+@media print {
+  .not-print {
+    display: none !important;
+  }
+  .prt-none-shadow {
+    box-shadow: none !important;
+  }
+  body {
+    direction: rtl !important;
+    padding: 10px !important;
+  }
+  .re-tas-pro {
+    width: 100%;
+    padding: 0 !important;
+    overflow-x: hidden;
+  }
+  .re-tas-pro .issue-main-info {
+    padding: 0 !important;
+    border: none !important;
+  }
+  .re-tas-pro .issue-main-info .row .col-md-3 {
+    width: 25%;
+  }
+  .table-responsive {
+    width: 100% !important;
+  }
+  .ar {
+    font-size: 19px !important;
+  }
+  .data-content {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100% !important;
+  }
+  .data-content div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100% !important;
+  }
+  .data-content div div {
+    width: 50%;
+  }
+  .data-content div div p {
+    font-size: 8px !important;
+    white-space: wrap !important;
+  }
+  .data-content div div.holder {
+    width: 100% !important;
+  }
+  .data-content div div.holder .special {
+    width: 100% !important;
+  }
+  .data-content div div.holder .special textarea {
+    width: 100% !important;
+    min-height: 100px !important;
+  }
+  .casher-invoice .invoice-content .logo-holder .the_image {
+    width: 10px !important;
+  }
+  .casher-invoice .invoice-content .invoice-name {
+    font-size: 10px !important;
+  }
+  .casher-invoice .the_address p {
+    font-size: 11px !important;
+  }
+  .casher-invoice .tax {
+    font-size: 11px;
+  }
+  .casher-invoice .the_date {
+    font-size: 11px;
+  }
+  .casher-invoice div b {
+    font-size: 11px !important;
+  }
+  .casher-invoice .main-table tr th {
+    font-size: 7px;
+    padding: 4px;
+  }
+  .casher-invoice .main-table tr td {
+    font-size: 7px;
+    padding: 4px;
+  }
+  .casher-invoice .bototm-table .dd {
+    font-size: 11px !important;
+  }
+  .casher-invoice .bototm-table .dd .nn {
+    font-size: 11px !important;
+  }
+  .casher-invoice .wel {
+    margin: auto !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+    text-align: center !important;
+  }
+  .casher-invoice .bar_code_holder {
+    width: 40% !important;
+  }
+  .casher-invoice .bar_code_holder svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .casher-invoice .parent-boxes-info {
+    margin-top: 10px !important;
+    width: 60% !important;
+  }
+  .box-shadow .header-invoice .row .col-lg-4 {
+    width: 33% !important;
+  }
+  .box-shadow .header-invoice .name {
+    font-size: 12px !important;
+  }
+  .box-shadow .header-invoice .address {
+    font-size: 12px !important;
+  }
+  .box-shadow .header-invoice .title {
+    font-size: 17px !important;
+  }
+  .box-shadow .header-invoice .img-holder img {
+    width: 70px !important;
+  }
+  .box-shadow .black {
+    font-size: 15px !important;
+  }
+  .box-shadow .def {
+    font-size: 14px !important;
+  }
+  .box-shadow .box-information {
+    flex-direction: row !important;
+  }
+  .box-shadow .box-bank {
+    width: calc(100% - 117px) !important;
+  }
+  .box-shadow .box-qr {
+    position: absolute !important;
+    margin: unset !important;
+    margin-bottom: 0 !important;
+    transform: translateY(calc(-50% - 13px)) !important;
+  }
+}
 .main-table-2 {
   width: 100%;
   border-radius: 8px 8px 0px 0px;

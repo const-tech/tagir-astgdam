@@ -1,7 +1,7 @@
 <div id="main-container" class="main-section users container">
 <div class="main-heading">
         <div class="large">
-            {{ __('Contracts') }}
+            العقود العامة
         </div>
     </div>
 
@@ -121,11 +121,11 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const currentUrl = window.location.pathname;
-    
+
             if (currentUrl.includes("/admin/")) {
                 document.getElementById("main-container").className = "main-side";
             }
         });
     </script>
-    
+
 </div>
