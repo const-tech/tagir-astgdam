@@ -46,6 +46,8 @@
 
                     <th>تاريخ الخروج</th>
                     <th>تاريخ العودة</th>
+                    <th>حالة الطلب</th>
+                    <th>تم الخروج؟</th>
                     <th>اخر إشعار</th>
                     <th>هل عاد الموظف</th>
                     <th>@lang('admin.Control')</th>
@@ -61,6 +63,29 @@
                         @endif
                         <td>{{ $vacation->exit_at }}</td>
                         <td>{{ $vacation->return_at }}</td>
+                        <td>
+                            @switch($vacation->approval_status)
+                                @case('approved')
+                                    <span class="badge bg-success">مقبول</span>
+                                    @break
+                                @case('rejected')
+                                    <span class="badge bg-danger">مرفوض</span>
+                                    @break
+                                @default
+                                    <span class="badge bg-secondary">معلق</span>
+                            @endswitch
+                        </td>
+
+                        {{-- تم الخروج؟ --}}
+                        <td>
+                            @if($vacation->exit_done_at)
+                                <span class="badge bg-success">
+                                    تم الخروج {{ $vacation->exit_done_at }}
+                                </span>
+                            @else
+                                <span class="badge bg-warning text-dark">لم يخرج بعد</span>
+                            @endif
+                        </td>
                         <td>{{ $vacation->notified_at ?? 'لم يتم التنبية بعد' }}</td>
                         <td>{{ $vacation->user_return_at ?? 'لم يعود بعد' }}</td>
                         <td>
@@ -70,6 +95,25 @@
                                         wire:click='userReturnAt({{ $vacation->id }})'>تسجيل رجوع
                                         الموظف</button>
                                 @endif
+                                 @if($vacation->approval_status === 'pending')
+        <button class="btn btn-primary btn-sm"
+            wire:click='approveVacation({{ $vacation->id }})'>
+            موافقة
+        </button>
+
+        <button class="btn btn-outline-danger btn-sm"
+            wire:click='rejectVacation({{ $vacation->id }})'>
+            رفض
+        </button>
+    @endif
+
+    {{-- تسجيل الخروج الفعلي بعد الموافقة --}}
+    @if($vacation->approval_status === 'approved' && !$vacation->exit_done_at)
+        <button class="btn btn-warning btn-sm"
+            wire:click='confirmExit({{ $vacation->id }})'>
+            تسجيل الخروج
+        </button>
+    @endif
                                 <div class="dropdown drop-table dropend">
                                     <button class="btn btn-outline-secondary btn-sm" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -192,13 +236,5 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
 
 </div>

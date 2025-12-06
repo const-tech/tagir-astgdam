@@ -74,5 +74,25 @@ class Vacations extends Component
         $vacation->update(['user_return_at' => now()->format('Y-m-d')]);
         $this->dispatch('alert', type: 'success', message: 'تم تسجيل رجوع الموظف');
     }
+
+
+    public function approveVacation(Vacation $vacation)
+{
+    $vacation->update(['approval_status' => 'approved']);
+    $this->dispatch('alert', type: 'success', message: 'تمت الموافقة على الطلب');
+}
+
+public function rejectVacation(Vacation $vacation)
+{
+    $vacation->update(['approval_status' => 'rejected']);
+    $this->dispatch('alert', type: 'success', message: 'تم رفض الطلب');
+}
+
+public function confirmExit(Vacation $vacation)
+{
+    $vacation->update(['exit_done_at' => now()->format('Y-m-d')]);
+    $this->dispatch('alert', type: 'success', message: 'تم تسجيل خروج الموظف');
+}
+
 }
 
