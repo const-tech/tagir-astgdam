@@ -54,6 +54,11 @@ class User extends Authenticatable
     {
         return $this->roles->first();
     }
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
 
     public function city()
     {

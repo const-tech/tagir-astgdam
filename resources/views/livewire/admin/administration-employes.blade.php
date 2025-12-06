@@ -23,6 +23,7 @@
                     <th>الاسم </th>
                     <th>البريد الالكتروني</th>
                     <th>الوظيفه</th>
+                    <th>القسم</th>
                     <th>الجهة الحكومية</th>
                     <th>الهوية/ الاقامة</th>
                     <th>انتهاء الهوية/ الاقامة</th>
@@ -31,6 +32,7 @@
                     <th> انتهاء التامين </th>
                     <th>الحساب البنكي</th>
                     <th>@lang('admin.Group')</th>
+                    <th>عقد العمل</th>
                     <th>التحكم</th>
                 </tr>
             </thead>
@@ -40,6 +42,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ App\Models\Job::find($user->job_id)?->name }}</td>
+                        <td>{{ $user->department?->name }}</td>
                         <td>{{ $user->governmental_entity }}</td>
                         <td>{{ $user->id_number }}</td>
                         <td>{{ $user->end_id_number }}</td>
@@ -48,6 +51,16 @@
                         <td>{{ $user->end_insurance }}</td>
                         <td>{{ $user->bank_account }}</td>
                         <td>{{ $user->role?->name }}</td>
+                        <td>
+                            @if($user->admin_contract_file)
+                                <a href="{{ display_file($user->admin_contract_file) }}" target="_blank"
+                                class="btn btn-sm btn-outline-primary">
+                                    عرض العقد
+                                </a>
+                            @else
+                                <span class="text-muted small">لا يوجد</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="d-flex align-items-center gap-3">
                                 <a href="{{ route('admin.administration-employees.show') }}"><i

@@ -36,6 +36,16 @@
             @endforeach
         </select>
     </div>
+    <div class="col-xs-12 col-sm-4 mb-3">
+        <label for=""> القسم</label>
+        <select class="form-select" wire:model="department_id">
+            <option value="">اختر القسم</option>
+            @foreach ($departments as $department)
+                <option value="{{ $department->id }}">{{ $department->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
 
     <div class="col-xs-12 col-sm-4 mb-3">
         <label for=""> الوظيفه</label>
@@ -80,6 +90,21 @@
         <label for=""> الحساب البنكي </label>
         <input class="form-control" type="number" wire:model="bank_account">
     </div>
+    <div class="col-xs-12 col-sm-4 mb-3">
+        <label for="">عقد العمل</label>
+        <input class="form-control" type="file" wire:model="admin_contract_file" />
+
+        @error('admin_contract_file')
+            <span class="text-danger small">{{ $message }}</span>
+        @enderror
+
+        @if(isset($obj) && $obj?->admin_contract_file)
+            <a href="{{ display_file($obj->admin_contract_file) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
+                عرض العقد الحالي
+            </a>
+        @endif
+    </div>
+
 
     <div class="col-12">
         <button type="button" class="main-btn px-4" wire:click="submit">

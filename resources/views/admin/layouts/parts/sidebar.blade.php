@@ -11,15 +11,6 @@
                 </div>
             </a>
         </li>
-        {{-- <li class="list-item">
-            <a href="{{ route('home') }}" target="_blank">
-        <div>
-            <i class="fas fa-house"></i>
-            @lang('admin.Visit front page')
-        </div>
-        </a>
-        </li> --}}
-
         <li class="list-item">
             <a data-bs-toggle="collapse" href="#Notifications"
                 aria-expanded="{{ request()->routeIs('admin.notifications.index') || request()->routeIs('admin.library.index') ? 'true' : 'false' }}">
