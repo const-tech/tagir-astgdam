@@ -31,9 +31,9 @@
             </div>
 
             <div class="labor-info-card non-rented-workers">
-                <span class="labor-card-icon">✓</span>
+                <span class="labor-card-icon"><i class="fas fa-briefcase"></i></span>
                 <div class="labor-card-title">مشاريع التاجير</div>
-                <div class="labor-count-number" id="nonRentedWorkers">{{ \App\Models\User::employes()->whereNull('side_job_id')->count() }}</div>
+                <div class="labor-count-number" id="nonRentedWorkers">00</div>
             </div>
         </div>
     </div>
