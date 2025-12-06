@@ -221,6 +221,12 @@
                     @endif
                 @endif
             </div>
+            <div class="col"></div>
+            <div class="col-12">
+                <label>الوصف</label>
+                <textarea class="form-control" wire:model="description" placeholder="اكتب وصف المشروع (اختياري)"></textarea>
+                @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
         </div>
 
         <div class="col-12">

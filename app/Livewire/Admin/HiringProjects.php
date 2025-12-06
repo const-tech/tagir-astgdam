@@ -25,6 +25,7 @@ class HiringProjects extends Component
     public $workers_file;
     // public $workers_count;
     public $search = '';
+    public $description;
 
     protected $rules = [
         'title'        => 'required|string|max:255',
@@ -34,6 +35,7 @@ class HiringProjects extends Component
         // 'workers_count'=> 'nullable|integer|min:0',
         'contract_file'=> 'nullable',
         'workers_file' => 'nullable',
+        'description'  => 'nullable|string',
     ];
     public function messages()
     {
@@ -74,6 +76,7 @@ class HiringProjects extends Component
         $this->end_date     = null;
         $this->contract_file = null;
         $this->workers_file  = null;
+        $this->description = null;
         // $this->workers_count = null;
 
     }
@@ -94,6 +97,9 @@ class HiringProjects extends Component
         $this->client_city  = $project->client?->city?->name;
         $this->start_date   = $project->start_date;
         $this->end_date     = $project->end_date;
+        $this->description = $project->description;
+        // $this->contract_file = $project->contract_file;
+        // $this->workers_file  = $project->workers_file;
         // $this->workers_count = 1;
         $this->screen = 'edit';
     }
