@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Department;
 use App\Models\User;
 use App\Traits\livewireResource;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +15,8 @@ class AdministrationEmployes extends Component
     public $user_id, $name, $last_name, $governmental_entity, $second_name, $email, $password, $job_id, $filter_status, $search_employeeId, $search_name_number, $filter_nationality,
         $type = 'administration-employe', $status, $phone, $nationality, $start_id_number, $job, $side_job, $start_work, $image;
     public $id_number, $end_id_number, $end_work, $end_passport, $end_insurance, $address, $bank_account, $role_id;
+    public $department_id, $admin_contract_file;
+
 
     public function setModelName()
     {
@@ -37,6 +40,9 @@ class AdministrationEmployes extends Component
             'type' => ['nullable'],
             'job_id' => ['nullable'],
             'role_id' => ['required'],
+            'department_id' => ['nullable', 'exists:departments,id'],
+            'admin_contract_file' => ['nullable'],
+
         ];
     }
 
@@ -62,6 +68,20 @@ class AdministrationEmployes extends Component
                 $this->data['image'] = store_file($this->image, 'employes');
             }
         }
+         if ($this->admin_contract_file) {
+            if ($this->obj && $this->obj->admin_contract_file) {
+                delete_file($this->obj->admin_contract_file);
+            }
+
+            $this->data['admin_contract_file'] = store_file(
+                $this->admin_contract_file,
+                'administration-employees-contracts'
+            );
+        } else {
+            if ($this->obj) {
+                $this->data['admin_contract_file'] = $this->obj->admin_contract_file;
+            }
+        }
     }
 
 
@@ -72,12 +92,14 @@ class AdministrationEmployes extends Component
     public function whileEditing()
     {
         $this->role_id = $this->obj->role?->id;
+        $this->department_id = $this->obj->department_id;
     }
 
 
     public function render()
     {
         $roles = Role::all();
+        $departments = Department::all();
         $users = User::administration()->where(function ($q) {
             if ($this->search_employeeId) {
                 $q->where('id', 'LIKE', '%' . $this->search_employeeId . '%');
@@ -95,7 +117,7 @@ class AdministrationEmployes extends Component
                 $q->where('nationality', $this->filter_nationality);
             }
         })->latest()->paginate(10);
-        return view('livewire.admin.administration-employes', compact('users', 'roles'))->extends('admin.layouts.admin')->section('content');
+        return view('livewire.admin.administration-employes', compact('users', 'roles', 'departments'))->extends('admin.layouts.admin')->section('content');
     }
 
 
