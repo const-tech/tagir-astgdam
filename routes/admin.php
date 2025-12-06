@@ -22,6 +22,7 @@ use App\Livewire\Admin\AdministrationEmployes;
 use App\Livewire\Admin\AdministrativeStructures;
 use App\Livewire\Admin\Categories;
 use App\Livewire\Admin\Cities;
+use App\Livewire\Admin\ComponentDepartments;
 use App\Livewire\Admin\ComponentJobs;
 use App\Livewire\Admin\EmailMenu;
 use App\Livewire\Admin\EmployeesStatus;
@@ -119,6 +120,8 @@ Route::group([
                     ->name('vacations');
             });
             Route::get('/employees/statuses', EmployeesStatus::class)->name('employees.statuses');
+            Route::get('/departments', ComponentDepartments::class)->name('departments');
+            Route::get('/cities', Cities::class)->name('cities');
 
             // Administration Employees
             Route::prefix('administration-employees')->group(function () {

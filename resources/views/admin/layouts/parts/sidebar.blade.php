@@ -72,6 +72,22 @@
                         </a>
                     </li>
                 @endcan
+                <li class="list-item">
+                        <a href="{{ route('admin.cities') }}" class="">
+                            <div>
+                                <i class="fas fa-users"></i>
+                                المدن
+                            </div>
+                        </a>
+                    </li>
+                <li class="list-item">
+                        <a href="{{ route('admin.departments') }}" class="">
+                            <div>
+                                <i class="fas fa-users"></i>
+                                الاقسام
+                            </div>
+                        </a>
+                    </li>
                 @can('read_governmentals')
                     <li class="list-item">
                         <a href="{{ route('admin.governmentals') }}" class="">
@@ -92,6 +108,7 @@
                             </div>
                         </a>
                     </li>
+
                 @endcan
                 <li class="list-item">
                     <a href="{{ route('admin.employees.statuses') }}" class="">

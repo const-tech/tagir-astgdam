@@ -22,6 +22,17 @@
                 <input type="text" wire:model="phone" class="form-control">
             </div>
             <div class="col-12 col-md-4 col-lg-3">
+                <label for="">@lang('City')</label>
+                <select wire:model="city_id" class="form-control">
+                    <option value="">اختر المدينة</option>
+                    @foreach(\App\Models\City::all() as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-3">
                 <label for="">جوال المسئول</label>
                 <input type="text" wire:model="phone" class="form-control">
             </div>

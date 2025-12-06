@@ -36,6 +36,7 @@
                                 <th>@lang('Name')</th>
                                 <th>الرقم الضريبي</th>
                                 <th>@lang('Phone')</th>
+                                <th>@lang('City')</th>
                                 <th>@lang('E-Mail Address')</th>
                                 <th>@lang('Address')</th>
                                 <th>السجل التجاري</th>
@@ -54,6 +55,7 @@
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->tax_number }}</td>
                                     <td>{{ $client->phone }}</td>
+                                    <td>{{ $client->city?->name }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->address }}</td>
                                     <td>{{ $client->commercial_register }}

@@ -80,6 +80,7 @@ class Clients extends Component
             'file_commercial_register' => 'nullable',
             'vat_certificate' => 'nullable',
             'file_vat_certificate' => 'nullable',
+            'city_id' => 'nullable|exists:cities,id',
         ];
     }
 
