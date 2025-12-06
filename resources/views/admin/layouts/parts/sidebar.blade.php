@@ -73,6 +73,14 @@
                     </li>
                 @endcan
                 <li class="list-item">
+                        <a href="{{ route('admin.roles') }}" class="">
+                            <div>
+                                <i class="fas fa-users"></i>
+                                الصلاحيات
+                            </div>
+                        </a>
+                    </li>
+                <li class="list-item">
                         <a href="{{ route('admin.cities') }}" class="">
                             <div>
                                 <i class="fas fa-users"></i>
