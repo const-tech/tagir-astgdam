@@ -50,7 +50,8 @@ public function employees()
         if ($search !== '') {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', '%' . $search . '%')
-                  ->orWhere('phone', 'LIKE', '%' . $search . '%');
+                  ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                  ->orWhere('id_number', 'LIKE', '%' . $search . '%');
             });
         }
 
