@@ -11,14 +11,13 @@
                 </div>
             </a>
         </li>
-        <li class="list-item">
+        {{-- <li class="list-item">
             <a data-bs-toggle="collapse" href="#Notifications"
                 aria-expanded="{{ request()->routeIs('admin.notifications.index') || request()->routeIs('admin.library.index') ? 'true' : 'false' }}">
                 <div>
                     <i class="fa-solid fa-bell"></i>
                     @lang('admin.Notifications')
                 </div>
-                {{-- <i class="fa-solid fa-angle-left arrow"></i> --}}
                 <i class="fas fa-angle-left "></i>
             </a>
         </li>
@@ -40,7 +39,7 @@
                     </div>
                 </a>
             </li>
-        </div>
+        </div> --}}
         @canany(['read_settings', 'read_governmentals', 'read_jobs', 'read_work_types', 'read_insurance_companies'])
             <li class="list-item">
                 <a data-bs-toggle="collapse" href="#settings" aria-expanded="false">
@@ -165,7 +164,7 @@
                     <a href="{{ route('admin.employes') }}" class="">
                         <div>
                             <i class="fas fa-users"></i>
-                            الموظفين
+                            العماله
                         </div>
                     </a>
                 </li>
