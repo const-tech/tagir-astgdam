@@ -12,7 +12,7 @@ class HiringProjects extends Component
 {
     use WithPagination,WithFileUploads;
   protected $paginationTheme = 'bootstrap';
-    public $queryString = ['screen'];
+    public $queryString = ['screen', 'client_id'];
     public $screen = 'index';
     public $project_id;
     public $title;
@@ -151,6 +151,9 @@ class HiringProjects extends Component
     public function render()
     {
         $projects = HiringProject::with('client')
+        ->when($this->client_id, function ($q) {
+            $q->where('client_id', $this->client_id);
+        })
             ->when($this->search, function ($q) {
                 $q->where('title', 'LIKE', "%{$this->search}%")
                   ->orWhereHas('client', function ($q2) {
@@ -159,8 +162,13 @@ class HiringProjects extends Component
             })
             ->latest()
             ->paginate(10);
-        $activeCount   = HiringProject::whereDate('end_date', '>=', now())->count();
-        $finishedCount = HiringProject::whereDate('end_date', '<', now())->count();
+        // $activeCount   = HiringProject::whereDate('end_date', '>=', now())->count();
+        // $finishedCount = HiringProject::whereDate('end_date', '<', now())->count();
+        $activeCount   = HiringProject::when($this->client_id, fn($q) => $q->where('client_id', $this->client_id))
+                    ->whereDate('end_date', '>=', now())->count();
+
+        $finishedCount = HiringProject::when($this->client_id, fn($q) => $q->where('client_id', $this->client_id))
+                    ->whereDate('end_date', '<', now())->count();
 
         $clients = User::clients()->select('id','name','phone','city_id')->get();
 

@@ -60,6 +60,7 @@
                             <th>هوية المدير</th>
                             <th>شهادة ال VAT </th>
                             <th class="not-print">المشاريع</th>
+                            <th class="not-print">العقود</th>
                             <th class="not-print">@lang('Active')</th>
                             <th class="text-center not-print">@lang('Actions')</th>
                         </tr>
@@ -107,9 +108,16 @@
                                                 class="fas fa-eye icon-table"></i></a>
                                     @endif
                                 </td>
+
                                 <td class="not-print">
-                                    <a href="{{ route('admin.projects', ['client_id' => $client->id]) }}" class="btn-light-purple">
-                                        {{ $client->projects->count() }}
+                                    <a href="{{ route('admin.hiring', ['client_id' => $client->id]) }}" class="btn-light-purple">
+                                        {{ $client->hiringProjects->count() }}
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                                <td class="not-print">
+                                    <a href="{{ route('admin.contracts', ['client_id' => $client->id]) }}" class="btn-light-purple">
+                                        {{ $client->contract->count() }}
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </td>
