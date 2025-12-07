@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-1 mb-2">
             <div class="main-title">
                 <div class="small">@lang('admin.Home')</div>
-                <div class="large">الموظفين
+                <div class="large">العماله
                     @if (request('status'))
                         ({{ __(request('status')) }})
                     @endif
@@ -19,16 +19,19 @@
         <div class="bar-options d-flex align-items-center justify-content-start flex-wrap gap-1 mb-2">
             <a class="main-btn" href="{{ route('admin.employes', ['screen' => 'create']) }}"> @lang('admin.Add')
                 <i class="fas fa-plus"></i></a>
-            <button class="main-btn btn-main-color" wire:click="resetFilter">كل الموظفين:
+            <button class="main-btn btn-main-color" wire:click="resetFilter">كل العمال:
                 {{ App\Models\User::employes()->count() }}</button>
-            <button class="main-btn" wire:click="$set('filter_status','active')">موظفين نشطين:
+            <button class="main-btn" wire:click="$set('filter_status','active')">عمال نشطين:
                 {{ App\Models\User::employes()->where('status', 'active')->count() }}</button>
-            <button class="main-btn btn-orange" wire:click="$set('filter_status','inactive')">موظفين غير نشظين:
-                {{ App\Models\User::employes()->where('status', 'inactive')->count() }}</button>
-            <button class="main-btn btn-blue" wire:click="$set('filter_nationality','sudia')">موظفين سعوديين:
-                {{ App\Models\User::employes()->where('nationality', 'sudia')->count() }}</button>
-            <button class="main-btn btn-blue" wire:click="$set('filter_nationality','not-sudia')">موظفين غير سعوديين:
-                {{ App\Models\User::employes()->where('nationality', 'not-sudia')->count() }}</button>
+            <button class="main-btn btn-orange" wire:click="$set('filter_status','inactive')"> عمال غير نشظين: {{ App\Models\User::employes()->where('status', 'inactive')->count() }}</button>
+            {{-- <button class="main-btn btn-blue" wire:click="$set('filter_nationality','sudia')">
+                موظفين سعوديين:
+                {{ App\Models\User::employes()->where('nationality', 'sudia')->count() }}
+            </button>
+            <button class="main-btn btn-blue" wire:click="$set('filter_nationality','not-sudia')">
+                موظفين غير سعوديين:
+                {{ App\Models\User::employes()->where('nationality', 'not-sudia')->count() }}
+            </button> --}}
             <button class="main-btn btn-purple px-4" button data-bs-toggle="modal"
                     data-bs-target="#importModal">استيراد
             </button>
@@ -88,7 +91,7 @@
                 </div>
             </div>
             <button class="main-btn bg-danger" data-bs-toggle="modal" data-bs-target="#deleteModalall">
-                حذف كل الموظفين
+                حذف كل العمال
             </button>
 
 
@@ -102,7 +105,7 @@
                                     aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            هل انت متاكد من حذف كل الموظفين ؟؟
+                            هل انت متاكد من حذف كل العمال ؟؟
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-sm px-3"
@@ -175,12 +178,12 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>الموظف</th>
+                    <th>العامل</th>
                     <th>البريد</th>
                     <th>الجوال</th>
                     <th>رقم الاقامة</th>
                     <th>انتهاء الاقامة</th>
-                    <th>حالة الموظف</th>
+                    <th>حالة العامل</th>
                     {{-- <th>جهة العمل</th> --}}
                     {{-- <th>تاريخ مباشرة العمل</th> --}}
                     <th>تاريخ انتهاء التأمين</th>

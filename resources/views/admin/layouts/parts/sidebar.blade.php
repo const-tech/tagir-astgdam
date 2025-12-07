@@ -1,4 +1,4 @@
-<div class="sidebar not-print" wire:ignore.self>
+<div class="sidebar not-print" wire:ignore>
     <div class="tog-active d-none d-lg-block" data-tog="true" data-active=".app">
         <i class="fas fa-bars"></i>
     </div>
@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class="list-item {{ request()->routeIs('admin.library.index') ? 'active' : '' }}">
-                <a href="{{ route('admin.library.index') }}" class="">
+                <a href="{{ route('admin.library.index') }}">
                     <div>
                         <i class="fa-solid fa-envelope-open-text"></i>
                         @lang('admin.Notifications Library')
@@ -54,41 +54,17 @@
             <div id="settings" class="collapse item-collapse">
                 @can('read_settings')
                     <li class="list-item">
-                        <a href="{{ route('admin.settings') }}" class="">
+                        <a href="{{ route('admin.settings') }}">
                             <div>
                                 <i class="fa-solid fa-gear icon"></i>
-                                @lang('admin.Settings')
+                                الاعدادات
                             </div>
                         </a>
                     </li>
                 @endcan
-                <li class="list-item">
-                        <a href="{{ route('admin.roles') }}" class="">
-                            <div>
-                                <i class="fas fa-users"></i>
-                                الصلاحيات
-                            </div>
-                        </a>
-                    </li>
-                <li class="list-item">
-                        <a href="{{ route('admin.cities') }}" class="">
-                            <div>
-                                <i class="fas fa-users"></i>
-                                المدن
-                            </div>
-                        </a>
-                    </li>
-                <li class="list-item">
-                        <a href="{{ route('admin.departments') }}" class="">
-                            <div>
-                                <i class="fas fa-users"></i>
-                                اقسام الاداره
-                            </div>
-                        </a>
-                    </li>
                 @can('read_governmentals')
                     <li class="list-item">
-                        <a href="{{ route('admin.governmentals') }}" class="">
+                        <a href="{{ route('admin.governmentals') }}">
                             <div>
                                 <i class="fas fa-users"></i>
                                 الوثائق الحكوميه
@@ -96,53 +72,83 @@
                         </a>
                     </li>
                 @endcan
-
-                @can('read_jobs')
-                    <li class="list-item">
-                        <a href="{{ route('admin.jobs') }}" class="">
-                            <div>
-                                <i class="fas fa-users"></i>
-                                التحكم المهن
-                            </div>
-                        </a>
-                    </li>
-
-                @endcan
                 <li class="list-item">
-                    <a href="{{ route('admin.employees.statuses') }}" class="">
+                    <a href="{{ route('admin.employees.statuses') }}">
                         <div>
                             <i class="fas fa-chart-pie"></i>
                             احصائيات الموظفين
                         </div>
                     </a>
                 </li>
-                @can('read_work_types')
-                    <li class="list-item">
-                        <a href="{{ route('admin.work_types') }}" class="">
-                            <div>
-                                <i class="fas fa-users"></i>
-                                انواع الدوام
-                            </div>
-                        </a>
-                    </li>
-                @endcan
-                @can('read_insurance_companies')
-                    <li class="list-item">
-
-                        <a href="{{ route('admin.insurance_companies') }}" class="">
-                            <div>
-                                <i class="fas fa-users"></i>
-                                شركات التامين
-                            </div>
-                        </a>
-                    </li>
-                @endcan
-
             </div>
         @endcanany
+
+        @canany(['read_users', 'read_administrative_structure', 'read_projects', 'read_goals'])
+            <li class="list-item">
+                <a data-bs-toggle="collapse" href="#administrativeAffairs" aria-expanded="false">
+                    <div>
+                        <i class=" fas fa-gear"></i>
+                        الشؤون الادارية
+                    </div>
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            </li>
+
+            <div id="administrativeAffairs" class="collapse item-collapse">
+                @can('read_users')
+                    <li class="list-item">
+                        <a href="{{ route('admin.users') }}">
+                            <div>
+                                <i class="fas fa-user-tie"></i>
+                                @lang('admin.Moderators')
+                            </div>
+                        </a>
+                    </li>
+                @endcan
+                @can('read_administrative_structure')
+                    <li class="list-item">
+                        <a href="{{ route('admin.administrative-structure') }}">
+                            <div>
+                                <i class="fa-solid fa-code-branch"></i>
+                                الهيكل الاداري
+                            </div>
+                        </a>
+                    </li>
+                @endcan
+                <li class="list-item">
+                    <a href="{{ route('admin.departments') }}">
+                        <div>
+                            <i class="fas fa-users"></i>
+                            اقسام الاداره
+                        </div>
+                    </a>
+                </li>
+                @can('read_projects')
+                    <li class="list-item">
+                        <a href="{{ route('admin.projects') }}">
+                            <div>
+                                <i class="fas fa-briefcase"></i>
+                                المشاريع
+                            </div>
+                        </a>
+                    </li>
+                @endcan
+                @can('read_goals')
+                    <li class="list-item">
+                        <a href="{{ route('admin.goals') }}">
+                            <div>
+                                <i class="fa-solid fa-bullseye"></i>
+                                الاهداف
+                            </div>
+                        </a>
+                    </li>
+                @endcan
+            </div>
+        @endcanany
+
         @canany(['read_administration_employees', 'read_employees'])
             <li class="list-item">
-                <a data-bs-toggle="collapse" href="#employesManagement" aria-expanded=""">
+                <a data-bs-toggle="collapse" href="#employesManagement" aria-expanded="false">
                     <div>
                         <i class=" fas fa-gear"></i>
                         ادارة الموظفين
@@ -150,10 +156,11 @@
                     <i class="fas fa-angle-left "></i>
                 </a>
             </li>
+
             <div id="employesManagement" class="collapse item-collapse">
 
                 <li class="list-item">
-                    <a href="{{ route('admin.administration-employees') }}" class="">
+                    <a href="{{ route('admin.administration-employees') }}">
                         <div>
                             <i class="fas fa-users"></i>
                             موظفين الادارة
@@ -161,7 +168,7 @@
                     </a>
                 </li>
                 <li class="list-item">
-                    <a href="{{ route('admin.employes') }}" class="">
+                    <a href="{{ route('admin.employes') }}">
                         <div>
                             <i class="fas fa-users"></i>
                             العماله
@@ -172,65 +179,8 @@
             </div>
         @endcanany
 
-        @canany(['read_users', 'read_administrative_structure', 'read_contracts', 'read_projects', 'read_goals'])
-
-            <li class="list-item">
-                <a data-bs-toggle="collapse" href="#administrativeAffairs" aria-expanded=""">
-                    <div>
-                        <i class=" fas fa-gear"></i>
-                        الشؤون الادارية
-                    </div>
-                    <i class="fas fa-angle-left"></i>
-                </a>
-            </li>
-            <div id="administrativeAffairs" class="collapse item-collapse">
-                @can('read_users')
-                    <li class="list-item">
-                        <a href="{{ route('admin.users') }}" class="">
-                            <div>
-                                <i class="fas fa-user-tie"></i>
-                                @lang('admin.Moderators')
-                            </div>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('read_administrative_structure')
-                    <li class="list-item">
-                        <a href="{{ route('admin.administrative-structure') }}" class="">
-                            <div>
-                                <i class="fa-solid fa-code-branch"></i>
-                                الهيكل الاداري
-                            </div>
-                        </a>
-                    </li>
-                @endcan
-
-
-                @can('read_projects')
-                    <li class="list-item">
-                        <a href="{{ route('admin.projects') }}" class="">
-                            <div>
-                                <i class="fas fa-briefcase"></i>
-                                المشاريع
-                            </div>
-                        </a>
-                    </li>
-                @endcan
-                @can('read_goals')
-                    <li class="list-item">
-                        <a href="{{ route('admin.goals') }}" class="">
-                            <div>
-                                <i class="fa-solid fa-bullseye"></i>
-                                الاهداف
-                            </div>
-                        </a>
-                    </li>
-                @endcan
-            </div>
-        @endcanany
         <li class="list-item">
-            <a data-bs-toggle="collapse" href="#hiring" aria-expanded=""">
+            <a data-bs-toggle="collapse" href="#hiring" aria-expanded="false">
                 <div>
                     <i class=" fas fa-gear"></i>
                     مشاريع التاجير
@@ -238,18 +188,10 @@
                 <i class="fas fa-angle-left "></i>
             </a>
         </li>
-        <div id="hiring" class="collapse item-collapse">
 
-            {{-- <li class="list-item">
-                <a href="{{ route('admin.management') }}" class="">
-                    <div>
-                        <i class="fas fa-users"></i>
-                        المشاريع
-                    </div>
-                </a>
-            </li> --}}
+        <div id="hiring" class="collapse item-collapse">
             <li class="list-item">
-                <a href="{{ route('admin.hiring') }}" class="">
+                <a href="{{ route('admin.hiring') }}">
                     <div>
                         <i class="fas fa-users"></i>
                         تأجير العمالة
@@ -257,7 +199,7 @@
                 </a>
             </li>
             <li class="list-item">
-                <a href="{{ route('admin.workers') }}" class="">
+                <a href="{{ route('admin.workers') }}">
                     <div>
                         <i class="fas fa-users"></i>
                         العمالة
@@ -265,19 +207,71 @@
                 </a>
             </li>
             @can('read_contracts')
-                    <li class="list-item">
-                        <a href="{{ route('admin.contracts') }}" class="">
-                            <div>
-                                <i class="fas fa-file-signature"></i>
-                                العقود
-                            </div>
-                        </a>
-                    </li>
-                @endcan
+                <li class="list-item">
+                    <a href="{{ route('admin.contracts') }}">
+                        <div>
+                            <i class="fas fa-file-signature"></i>
+                            العقود
+                        </div>
+                    </a>
+                </li>
+            @endcan
         </div>
+
+        <li class="list-item">
+            <a data-bs-toggle="collapse" href="#project-services" aria-expanded="false">
+                <div>
+                    <i class="fas fa-server"></i>
+                    خدمات البرنامج
+                </div>
+                <i class="fas fa-angle-left "></i>
+            </a>
+        </li>
+
+        <div id="project-services" class="collapse item-collapse">
+            <li class="list-item">
+                <a href="{{ route('admin.cities') }}">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        المدن
+                    </div>
+                </a>
+            </li>
+            @can('read_jobs')
+                <li class="list-item">
+                    <a href="{{ route('admin.jobs') }}">
+                        <div>
+                            <i class="fas fa-users"></i>
+                            التحكم المهن
+                        </div>
+                    </a>
+                </li>
+            @endcan
+            @can('read_work_types')
+                <li class="list-item">
+                    <a href="{{ route('admin.work_types') }}">
+                        <div>
+                            <i class="fas fa-users"></i>
+                            انواع الدوام
+                        </div>
+                    </a>
+                </li>
+            @endcan
+            @can('read_insurance_companies')
+                <li class="list-item">
+                    <a href="{{ route('admin.insurance_companies') }}">
+                        <div>
+                            <i class="fas fa-users"></i>
+                            شركات التامين
+                        </div>
+                    </a>
+                </li>
+            @endcan
+        </div>
+
         @can('read_clients')
             <li class="list-item">
-                <a href="{{ route('admin.clients') }}" class="">
+                <a href="{{ route('admin.clients') }}">
                     <div>
                         <i class="fas fa-users"></i>
                         @lang('Clients')
@@ -288,7 +282,7 @@
 
         @can('read_invoices')
             <li class="list-item">
-                <a href="{{ route('admin.invoices') }}" class="">
+                <a href="{{ route('admin.invoices') }}">
                     <div>
                         <i class="fas fa-receipt"></i>
                         الفواتير
@@ -317,7 +311,7 @@
 
         @can('read_price_quotation')
             <li class="list-item">
-                <a href="{{ route('admin.prices') }}" class="">
+                <a href="{{ route('admin.prices') }}">
                     <div>
                         <i class="fas fa-dollar-sign"></i>
                         عرض الأسعار
@@ -328,7 +322,7 @@
 
         {{-- @can('read_contactes')
             <li class="list-item">
-                <a href="{{ route('admin.contactes') }}" class="">
+                <a href="{{ route('admin.contactes') }}">
                     <div>
                         <i class="fa-solid fa-handshake-angle"></i>
                         @lang('admin.Contact Us')
