@@ -33,7 +33,7 @@
             <div class="labor-info-card projects-tager">
                 <span class="labor-card-icon"><i class="fas fa-briefcase"></i></span>
                 <div class="labor-card-title">مشاريع التاجير</div>
-                <div class="labor-count-number" id="nonRentedWorkers">00</div>
+                <div class="labor-count-number" id="nonRentedWorkers">{{ \App\Models\HiringProject::count() }}</div>
             </div>
         </div>
     </div>
