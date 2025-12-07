@@ -58,6 +58,14 @@
                                 <div class="col-6 col-md-6 col-lg-4">
                                     <div class="input-holder mt-3">
                                         <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
+                                            نوع التاجير
+                                        </label>
+                                        <input type="text" disabled="" class="form-control" value="شركة او عقد">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-4">
+                                    <div class="input-holder mt-3">
+                                        <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
                                             تاريخ بداية العقد
                                         </label>
                                         <input type="text" disabled="" class="form-control" value="">
@@ -195,42 +203,6 @@
                         <div class="content-section">
                             <div class="title my-2 p-2" style="background: #2E5789;">
                                 <h3 class="mb-0 text-white" style="font-size:14px">
-                                    الاجازات و الغياب
-                                </h3>
-                            </div>
-                            <div class="row gx-3">
-                                <div class="col-6 col-md-6 col-lg-4">
-                                    <div class="input-holder mt-3">
-                                        <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
-                                            الرصيد الحالي
-                                        </label>
-                                    </div>
-                                    <input type="text" disabled="" class="form-control" value="0">
-                                </div>
-                                <div class="col-6 col-md-6 col-lg-4">
-                                    <div class="input-holder mt-3">
-                                        <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
-                                            الغياب
-                                        </label>
-                                    </div>
-                                    <input type="text" disabled="" class="form-control" value="">
-                                </div>
-                                <div class="col-6 col-md-6 col-lg-4">
-                                    <div class="input-holder mt-3">
-                                        <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
-                                            الإنذارات
-                                        </label>
-                                        <input type="text" disabled="" class="form-control" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-6">
-                        <div class="content-section">
-                            <div class="title my-2 p-2" style="background: #2E5789;">
-                                <h3 class="mb-0 text-white" style="font-size:14px">
                                     خروج / عودة
                                 </h3>
                             </div>
@@ -255,15 +227,15 @@
                         </div>
                         <hr>
                     </div>
-                </div>
-                <div class="col-6 col-md-6">
-                    <div class="content-section">
-                        <div class="title my-2 p-2" style="background: #2E5789;">
-                            <h3 class="mb-0 text-white" style="font-size:14px">
-                                المشاريع
-                            </h3>
+                    <div class="col-6 col-md-6">
+                        <div class="content-section">
+                            <div class="title my-2 p-2" style="background: #2E5789;">
+                                <h3 class="mb-0 text-white" style="font-size:14px">
+                                    المشاريع
+                                </h3>
+                            </div>
+                            <hr>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
