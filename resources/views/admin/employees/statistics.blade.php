@@ -58,6 +58,14 @@
                                 <div class="col-6 col-md-6 col-lg-4">
                                     <div class="input-holder mt-3">
                                         <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
+                                            نوع التاجير
+                                        </label>
+                                        <input type="text" disabled="" class="form-control" value="شركة او عقد">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-4">
+                                    <div class="input-holder mt-3">
+                                        <label for="" class="form-label" style="color:#9fa5a7;font-size:11px">
                                             تاريخ بداية العقد
                                         </label>
                                         <input type="text" disabled="" class="form-control" value="">
