@@ -71,33 +71,12 @@ class Select2Pagination extends Controller
         $employees = $query->simplePaginate($perPage);
 
         return response()->json([
-            'results' => $employees->items(), // 👈 مهم: items()
+            'results' => $employees->items(), 
             'pagination' => [
-                'more' => $employees->hasMorePages(), // 👈 أو !empty(nextPageUrl())
+                'more' => $employees->hasMorePages(),
             ],
         ]);
     }
-
-    //     $query = User::employes()
-    //         ->select('id', DB::raw('name AS text'));
-
-    //     if ($search !== '') {
-    //         $query->where(function ($q) use ($search) {
-    //             $q->where('name', 'LIKE', '%' . $search . '%')
-    //                 ->orWhere('phone', 'LIKE', '%' . $search . '%')
-    //                 ->orWhere('id_number', 'LIKE', '%' . $search . '%');
-    //         });
-    //     }
-
-    //     $employees = $query->simplePaginate(10);
-
-    //     return response()->json([
-    //         'results' => $employees->items(),
-    //         'pagination' => [
-    //             'more' => !empty($employees->nextPageUrl()),
-    //         ],
-    //     ]);
-    // }
     public function nationalities()
     {
         if (\request()->ajax()) {
