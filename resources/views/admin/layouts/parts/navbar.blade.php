@@ -64,7 +64,7 @@
                 </a>
             </div>
 
-            <div class="dropdown">
+            {{-- <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle btn-sm px-4" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     {{ LaravelLocalization::getSupportedLocales()[app()->getLocale()]['native'] }}
@@ -76,7 +76,7 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
+            </div> --}}
 
 
             <div class="dropdown info-user ms-auto">
